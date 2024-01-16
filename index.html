@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>ライブラリーを使ってみよう！pandas超入門</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/custom.css" />
+    <link rel="stylesheet" href="dist/style.css" />
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <div class="topLogo"><img src="dist/ACube.png" width="75px" /></div>
+        <!-- Reveal & font-awesome hidden→ data-visibility="hidden" -->
+        <section data-visibility="hidden">
+          <h2>
+            <a href="https://revealjs.com/" target="_blank">reveal.js doc</a>
+          </h2>
+          <h2>
+            <a href="https://fontawesome.com/search" target="_blank"
+              >font-awesom icon</a
+            >
+          </h2>
+          <hr />
+          <br />
+          <div class="wrapper3">
+            <div>
+              <i class="fa-solid fa-location-dot icon"></i>
+              <p>fa-solid fa-location-dot</p>
+            </div>
+            <div>
+              <i class="fa-solid fa-user icon"></i>
+              <p>fa-solid fa-user</p>
+            </div>
+            <div>
+              <i class="fa-solid fa-file icon"></i>
+              <p>fa-solid fa-file</p>
+            </div>
+          </div>
+          <div>
+            <ul>
+              <li>
+                <a
+                  href="https://kino-code.com/pandas_course_pandas/"
+                  target="_blank"
+                  >キノブログ pandas</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.kikagaku.co.jp/kikagaku-blog/pandas-dataframe/"
+                  target="_blank"
+                  >キカガクブログ pandas</a
+                >
+              </li>
+            </ul>
+          </div>
+        </section>
+        <!-- タイトル　Pandas DataFrameとは-->
+        <section>
+          <section>
+            <p>edaJuke(江田塾)</p>
+            <h1>ライブラリーを使ってみよう！pandas超入門</h1>
+            <hr />
+            <br />
+            <ul>
+              <li>pandas : Python のデータ分析ライブラリの一つ</li>
+              <li>データ解析を行うための便利なツールの詰め合わせパック！</li>
+              <li>Excelで出来る事はほぼ全て可能！</li>
+              <li>pandasで最も使われるDataFrameをマスターしよう！</li>
+            </ul>
+            <p>by Occupier Advisory | Hirotaka Eda</p>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameとは
+            </p>
+            <h1>DataFrameとは</h1>
+            <hr />
+            <br />
+            <div class="wrapper2">
+              <div>
+                <ul>
+                  <li>
+                    PandasDataFrame : 行と列で構成される表形式のデータ構造
+                    (ExcelのSheetの様なもの)
+                  </li>
+                </ul>
+                <img src="./dist/DataFrame1.png" style="width: 500px" />
+              </div>
+              <div>
+                <ul>
+                  <li>PandasDataFrameは以下の3つの要素で構成されている</li>
+                </ul>
+                <img src="./dist/DataFrame2.png" style="width: 500px" />
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameとは
+            </p>
+            <h1>DataFrameの3つの要素</h1>
+            <hr />
+            <br />
+            <div class="wrapper2">
+              <div>
+                <img src="./dist/DataFrame2.png" style="width: 500px" />
+              </div>
+              <div>
+                <ul>
+                  <li>
+                    <h2>values :</h2>
+                    <p>セルに格納されている値</p>
+                  </li>
+                  <li>
+                    <h2>columns :</h2>
+                    <p>列のラベル（列に入る数値や文字列の名前）</p>
+                  </li>
+                  <li>
+                    <h2>index :</h2>
+                    <p>行のラベル（行の通し番号のようなもの）</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameとは
+            </p>
+            <h1>Pandasを使う準備をする</h1>
+            <hr />
+            <br />
+            <div class="wrapper2">
+              <div>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  import pandas as pd
+                  import numpy as np
+                </code></pre>
+                <p style="margin-top: 50px">
+                  今回numpyについては細かく解説は行わないが,<br />
+                  セットで使われるライブラリーなのでpandasを使うときは一緒にインポートする様にしよう！
+                </p>
+              </div>
+              <div>
+                <ul>
+                  <li>
+                    Pandasはサードパーティーライブラリーなのでインポートする必要がある
+                  </li>
+                  <li>
+                    インポートの方法はシンプルでコードの一番上で<br />
+                    <u>import pandas</u><br />と打ち打ち込み実行する
+                  </li>
+                  <li>
+                    ベストプラクティスとして<br />
+                    <u>import pandas as pd</u><br />
+                    と打ち込むとpandas を pd として省略できる様になる
+                  </li>
+                  <ul style="font-size: 1rem">
+                    <li>
+                      Google
+                      Colabでは標準でPandasが搭載されているのでそのままインポートされます
+                    </li>
+                    <li>
+                      自分のPCのローカル環境で行う場合はパッケージをインストールする必要があるので注意
+                    </li>
+                  </ul>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </section>
+        <!-- DataFrameを作成する -->
+        <section>
+          <section>
+            <p>edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門</p>
+            <h1>DataFrameを作成する</h1>
+            <hr />
+            <br />
+            <ul>
+              <li>DataFrameを作成する方法はいくつかある</li>
+              <li>その中でもよく使われる方法を試してみよう！</li>
+              <li>1. 辞書型(dict型)から作成する</li>
+              <li>2. リスト型(list型)から作成する</li>
+              <li>3. csvを読み込む</li>
+            </ul>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameを作成する
+            </p>
+            <h1>1. 辞書型(dict型)から作成する</h1>
+            <hr />
+            <br />
+            <div class="wrapper2">
+              <div>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  dict_data = {
+                        'Name' : ['田中','佐藤','伊藤','鈴木'],
+                        'Age' : [20,30,40,35],
+                        'Hobby' : ['ゲーム','キャンプ','ゲーム','ラーメン食べ歩き']
+                  }
+  
+                  df = pd.DataFrame(dict_data)
+                  df
+                </code></pre>
+                <table>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Age</th>
+                      <th>Hobby</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>0</td>
+                      <td>田中</td>
+                      <td>20</td>
+                      <td>ゲーム</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>佐藤</td>
+                      <td>30</td>
+                      <td>キャンプ</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>伊藤</td>
+                      <td>40</td>
+                      <td>ゲーム</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>鈴木</td>
+                      <td>35</td>
+                      <td>ラーメン食べ歩き</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <ul>
+                  <li>
+                    Pythonの辞書を使用してDataFrameを作成する場合、キーが列名となり、値がデータになります
+                  </li>
+                  <li>それぞれの列の値の数が同数である必要がある</li>
+                  <li>データが無い場合は空文字列("")などを渡してあげよう</li>
+                  <li>
+                    DataFrameの作成方法 :<br />pd.DataFrame(引数に辞書型データ)
+                  </li>
+                  <li>
+                    変数へ格納する (ベストプラクティス : df または
+                    df_"好きな命名")
+                  </li>
+                  <li>DataFrameの表示は最後に変数名を実行 or display(df)</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameを作成する
+            </p>
+            <h1>2. リスト型(list型)から作成する</h1>
+            <hr />
+            <br />
+            <div class="wrapper2">
+              <div>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  data=[
+                        ['田中',20,'ゲーム'],
+                        ['佐藤',30,'キャンプ'],
+                        ['伊藤',40,'ゲーム'],
+                        ['鈴木',35,'ラーメン食べ歩き']
+                  ]
+
+                  df2=pd.DataFrame(
+                        data=data,
+                        columns=['名前','年齢','趣味']
+                  )
+                  df2
+                </code></pre>
+                <table>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>名前</th>
+                      <th>年齢</th>
+                      <th>趣味</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>0</td>
+                      <td>田中</td>
+                      <td>20</td>
+                      <td>ゲーム</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>佐藤</td>
+                      <td>30</td>
+                      <td>キャンプ</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>伊藤</td>
+                      <td>40</td>
+                      <td>ゲーム</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>鈴木</td>
+                      <td>35</td>
+                      <td>ラーメン食べ歩き</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <ul>
+                  <li>
+                    Pythonのリストを使用してDataFrameを作成する場合、pd.DataFrame()の引数へdataと合わせてcolumnsを配列で渡す必要がある
+                  </li>
+                  <li>
+                    辞書型と同様にそれぞれの列の値の数が同数である必要がある
+                  </li>
+                  <li>
+                    DataFrameの作成方法 :<br />pd.DataFrame(data=[リスト],
+                    columns=[列名の配列])
+                  </li>
+                  <li>
+                    辞書型と比較すると記述量は多いが可読性, メンテナンス性が高い
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameを作成する
+            </p>
+            <p>3. csvから読み込むの前に</p>
+            <h1>Google Driveをマウントしよう！</h1>
+            <hr />
+            <br />
+            <div class="wrapper2">
+              <div>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  import os
+                  from google.colab import drive
+                  drive.mount('/content/drive')
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  os.getcwd()
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  ProjectPath = '/content/drive/My Drive/edaJuke/data'
+                  os.mkdir(ProjectPath)
+                  os.chdir(ProjectPath)
+                  os.listdir()
+                </code></pre>
+
+                <pre><code type="python" data-trim="" data-noescape="">
+                  > [] #空配列が返ってきたら成功
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df.to_csv('SampleData.csv')
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  > ['SampleData.csv']
+                </code></pre>
+              </div>
+              <div>
+                <ul>
+                  <li>os はディレクトリーの操作を行う事が出来るライブラリー</li>
+                  <li>os.getcwd() : 現在のディレクトリーのパス取得</li>
+                  <li>
+                    os.mkdir(パス) : 引数に渡したパスのディレクトリーを作成する
+                  </li>
+                  <li>os.chdir(パス) : 引数に渡したパスへ移動する</li>
+                  <li>os.listdir() : 現在のディレクトリーの中身を取得する</li>
+                  <li>
+                    先ほど作成したDataFrameをdf.to_csv('SampleData.csv')で保存してみよう！
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameを作成する
+            </p>
+            <h1>3. csvを読み込む</h1>
+            <hr />
+            <br />
+            <div class="wrapper2">
+              <div>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df3 = pd.read_csv('SampleData.csv')
+                  
+                  display(df3)
+                </code></pre>
+                <table>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Unnamed: 0</th>
+                      <th>Name</th>
+                      <th>Age</th>
+                      <th>Hobby</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>0</td>
+                      <td>0</td>
+                      <td>田中</td>
+                      <td>20</td>
+                      <td>ゲーム</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>1</td>
+                      <td>佐藤</td>
+                      <td>30</td>
+                      <td>キャンプ</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>2</td>
+                      <td>伊藤</td>
+                      <td>40</td>
+                      <td>ゲーム</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>3</td>
+                      <td>鈴木</td>
+                      <td>35</td>
+                      <td>ラーメン食べ歩き</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <ul>
+                  <li>先ほど保存した SampleData.csv を読み込んでみよう！</li>
+                  <li>df3 = pd.read_csv('SampleData.csv')</li>
+                  <li>新しい変数df3として宣言して表示をしてみる</li>
+                  <li>左の様に"Unnamed: 0"という変な列が出現してしまう</li>
+                  <li>
+                    これはpandasの.to_csv()のデフォルトの設定でインデックスも保存するとなっている為！
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameを作成する
+            </p>
+            <h1>csvを保存する時の注意点</h1>
+            <hr />
+            <br />
+            <div class="wrapper2">
+              <div>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df.to_csv('SampleData.csv', index=False)
+                  df3 = pd.read_csv('SampleData.csv')
+                  
+                  display(df3)
+                </code></pre>
+                <table>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Age</th>
+                      <th>Hobby</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>0</td>
+                      <td>田中</td>
+                      <td>20</td>
+                      <td>ゲーム</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>佐藤</td>
+                      <td>30</td>
+                      <td>キャンプ</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>伊藤</td>
+                      <td>40</td>
+                      <td>ゲーム</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>鈴木</td>
+                      <td>35</td>
+                      <td>ラーメン食べ歩き</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <ul>
+                  <li>dfを保存する際の引数にindex=Falseを追加して実行して</li>
+                  <li>改めてdf3へcsvを読み込んでみよう！</li>
+                  <li>変な列が出てこなくなります</li>
+                  <li>
+                    pandasでは自動でインデックスに0から始まる整数の連番が振られます
+                  </li>
+                  <li>
+                    ベストプラクティスとしてcsvへ保存する際にはindex=Falseで行おう
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameを作成する
+            </p>
+            <h1>csvを読み込む時の注意点</h1>
+            <hr />
+            <br />
+            <div class="wrapper2">
+              <div>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df.to_csv('SampleData_shiftjis.csv', 
+                              index=False, encoding='shift-jis')
+                  pd.read_csv('SampleData_shiftjis.csv')
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  UnicodeDecodeError: ~
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  pd.read_csv('SampleData_shiftjis.csv', encoding='shift-jis')
+                </code></pre>
+                <table>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Name</th>
+                      <th>Age</th>
+                      <th>Hobby</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>0</td>
+                      <td>田中</td>
+                      <td>20</td>
+                      <td>ゲーム</td>
+                    </tr>
+                    <tr>
+                      <td>1</td>
+                      <td>佐藤</td>
+                      <td>30</td>
+                      <td>キャンプ</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>伊藤</td>
+                      <td>40</td>
+                      <td>ゲーム</td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>鈴木</td>
+                      <td>35</td>
+                      <td>ラーメン食べ歩き</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <ul>
+                  <li>
+                    Excelのデフォルトのcsv保存エンコード方式 : "shift-jis"
+                  </li>
+                  <li>Pandasのデフォルトのcsv保存エンコード方式 : "utf-8"</li>
+                  <li>
+                    dfを試しにエンコード方式を"shift-jis"に指定して保存してみよう
+                  </li>
+                  <li>改めてcsvを読み込もうとすると左の様なエラーが起きる</li>
+                  <li>
+                    エラーが出たらcsvを読み込む際の引数にencoding="shift-jis"として読み込んでみよう！
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </section>
+        <!-- DataFrameの中身を確認する -->
+        <section>
+          <section>
+            <p>edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門</p>
+            <h1>DataFrameの中身を確認する</h1>
+            <hr />
+            <br />
+            <ul>
+              <li>データの解析・分析・操作の前に必ず中身を確認しよう！</li>
+            </ul>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              中身を確認する
+            </p>
+            <h1>サンプルDataFrameを作成する</h1>
+            <hr />
+            <br />
+            <pre><code type="python" data-trim="" data-noescape="">
+              url="http://www5.cao.go.jp/keizai-shimon/kaigi/special/future/keizai-jinkou_data/csv/file01.csv"
+              df=pd.DataFrame(url,encoding='shift-jis',header=7)
+            </code></pre>
+            <ul>
+              <li>
+                今回はこちらの
+                <a
+                  href="https://data.e-gov.go.jp/data/dataset/cao_20150109_0014/resource/e014630e-168b-4b60-984d-1f737067784a"
+                >
+                  e-govデータポータル
+                </a>
+                データをインポートして利用してみます
+              </li>
+              <li>PandasはURLからもデータを取得する事が出来ます</li>
+              <li>このcsvのエンコーディング方式 : "shift-jis"</li>
+              <li>またcsvデータの初めの6行にデータの説明等の記載があった為</li>
+              <li>
+                header=7 : 7行目をDataFrameのカラム(ヘッダー)として読み込みます
+              </li>
+            </ul>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              中身を確認する
+            </p>
+            <h1>簡単確認6ステップ</h1>
+            <hr />
+            <br />
+            <div class="wrapper3">
+              <div>
+                <h3>len(df)</h3>
+                <p>DataFrameの行数の確認</p>
+              </div>
+              <div>
+                <h3>df.columns</h3>
+                <p>DataFrameの列名を確認</p>
+              </div>
+              <div>
+                <h3>len(df.columns)</h3>
+                <p>DataFrameの列数の確認</p>
+              </div>
+              <div>
+                <h3>df.head()</h3>
+                <p>DataFrameの初めの5行を取得</p>
+              </div>
+              <div>
+                <h3>df.tail()</h3>
+                <p>DataFrameの最後の5行を取得</p>
+              </div>
+              <div>
+                <h3>df.sample()</h3>
+                <p>DataFrameからランダムに1行取得</p>
+              </div>
+            </div>
+            <u>
+              <p>
+                * .head() .tail() .sample()メゾットは<br />
+
+                引数に取得したい任意の数字を入れる事でその数の行を取得する事が可能
+              </p>
+            </u>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              中身を確認する
+            </p>
+            <h1>個別の列を確認してみよう！</h1>
+            <hr />
+            <br />
+            <div class="wrapper3">
+              <div>
+                <h3>df["市区町村名"]</h3>
+                <ol>
+                  <li>北海道 札幌市</li>
+                  <li>北海道 函館市</li>
+                  <li>北海道 小樽市</li>
+                  <li>北海道 旭川市</li>
+                  <li>北海道 室蘭市</li>
+                </ol>
+                <p>...</p>
+                <p>Name: 市区町村名, Length: 1741, <u>dtype: object</u></p>
+              </div>
+              <div>
+                <h3>df["市区町村コード"]</h3>
+                <ol>
+                  <li>11002</li>
+                  <li>12025</li>
+                  <li>12033</li>
+                  <li>12041</li>
+                  <li>12050</li>
+                </ol>
+                <p>...</p>
+                <p>Name: 市区町村名, Length: 1741, dtype: <u>int64</u></p>
+              </div>
+              <div>
+                <h3>df["1970年"]</h3>
+                <ol>
+                  <li>1,010,177</li>
+                  <li>322,497</li>
+                  <li>191,802</li>
+                  <li>297,189</li>
+                  <li>162,059</li>
+                </ol>
+                <p>...</p>
+                <p>
+                  Name: 市区町村名, Length: 1741, dtype: <u>dtype: object</u>
+                </p>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              中身を確認する
+            </p>
+            <h1>int型の列を集計してみよう！</h1>
+            <hr />
+            <br />
+            <div class="wrapper3">
+              <div>
+                <h3 style="font-size: 25px">df["市区町村コード"].sum()</h3>
+                <p>368156751</p>
+                <p>列の合計</p>
+              </div>
+              <div>
+                <h3 style="font-size: 25px">df["市区町村コード"].mean()</h3>
+                <p>211462.80930499712</p>
+                <p>列の平均値</p>
+              </div>
+              <div>
+                <h3 style="font-size: 25px">df["市区町村コード"].median()</h3>
+                <p>204030.0</p>
+                <p>列の中央値</p>
+              </div>
+              <div>
+                <h3 style="font-size: 25px">df["市区町村コード"].min()</h3>
+                <p>11002</p>
+                <p>列の最小値</p>
+              </div>
+              <div>
+                <h3 style="font-size: 25px">df["市区町村コード"].max()</h3>
+                <p>473821</p>
+                <p>列の最大値</p>
+              </div>
+              <div>
+                <h3 style="font-size: 25px">df["1970年"].mean()</h3>
+                <p style="color: red; font-weight: bold">ValueError</p>
+                <i class="fa-regular fa-face-sad-tear icon"> なぜ？</i>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              中身を確認する
+            </p>
+            <h1>任意の値を取得しよう！</h1>
+            <hr />
+            <br />
+            <p>1行目の北海道 札幌市の1970年と2010年の人口を取得してみよう！</p>
+            <div class="wrapper3">
+              <div>
+                <h3>df['1970年'][0]</h3>
+                <p>'1,010,177 '</p>
+              </div>
+              <div>
+                <h3>df.loc[0,"1970年"]</h3>
+                <p>'1,010,177 '</p>
+              </div>
+              <div>
+                <h3>df.iloc[0,2]</h3>
+                <p>'1,010,177 '</p>
+              </div>
+              <div>
+                <h3>df['2010年'][0]</h3>
+                <p>'1,913,545 '</p>
+              </div>
+              <div>
+                <h3>df.loc[0,"2010年"]</h3>
+                <p>'1,913,545 '</p>
+              </div>
+              <div>
+                <h3>df.iloc[0,10]</h3>
+                <p>'1,913,545 '</p>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              中身を確認する
+            </p>
+            <h1>条件に合う行を抽出してみよう！</h1>
+            <hr />
+            <br />
+            <p>東京都の行を抽出してみよう！</p>
+            <div class="wrapper2">
+              <div>
+                <h3>文字列</h3>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df[df['市区町村名'].str.startswith('東京都 ')]
+                </code></pre>
+                <ul>
+                  <li>列の文字列を条件にする際には.strメゾットを使う</li>
+                  <li>他にも.str.endswith() .str.contains()など</li>
+                </ul>
+              </div>
+              <div>
+                <h3>数値</h3>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df[
+                        (df["市区町村コード"]>13000) &
+                        (df["市区町村コード"]&lt;14000)
+                  ]
+                </code></pre>
+                <ul>
+                  <li>数値の際には比較演算子を使う</li>
+                  <li>複数条件がある場合は()括弧で括り</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </section>
+        <!-- DataFrameの操作 -->
+        <section>
+          <section>
+            <p>edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門</p>
+            <h1>DataFrameの操作</h1>
+            <hr />
+            <br />
+            <ul>
+              <li>値の変更</li>
+              <li>列名の変更</li>
+              <li>列・行の削除</li>
+              <li>...</li>
+              <li>主要なDataFrame操作を覚えよう！</li>
+            </ul>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameの操作
+            </p>
+            <h1>DataFrameをコピーしよう！</h1>
+            <hr />
+            <br />
+            <div class="wrapper2">
+              <div>
+                <p>悪い例</p>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df_new = df
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  id(df_new) == id(df)
+  
+                  > True
+                </code></pre>
+                <p>正解</p>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df_new = df.copy()
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  id(df_new) == id(df)
+  
+                  > False
+                </code></pre>
+              </div>
+              <div>
+                <ul>
+                  <li>
+                    元データを保持する為にDataFrameをコピーする際には必ず.copy()メゾットを使おう！
+                  </li>
+                  <li>
+                    そのまま =
+                    で新しい変数へ宣言してしまうと同じオブジェクトになってしまう
+                  </li>
+                  <li>
+                    DataFrame名が違っても同じオブジェクトidの為、片方を操作するともう片方も変更されてしまうにで注意！
+                  </li>
+                  <li>
+                    この様にしておく事により操作を誤ってももう一度df_new=df.copy()を実行すれば元に戻れる
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameの操作
+            </p>
+            <h1>値を変更してみよう！</h1>
+            <hr />
+            <br />
+            <p>1行目の北海道 札幌市の市区町村コードを変更してみよう！</p>
+            <div class="wrapper2">
+              <div>
+                <h3>.loc</h3>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df_new.loc[0,"市区町村コード"] = 123456
+                </code></pre>
+              </div>
+              <div>
+                <h3>.iloc</h3>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df_new.iloc[0,1] = 123456
+                </code></pre>
+              </div>
+            </div>
+            <p>
+              .ilocメゾットの方が記述量が少なくスッキリして見えるが<br />
+              列の何番目か数える必要があったり、<br />
+              将来的に列の追加や削除により順番が変わってしまった場合、<br />
+              不具合が生じてしまう可能性があるので注意！
+            </p>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameの操作
+            </p>
+            <h1>ダイナミックに値を変更してみよう！</h1>
+            <hr />
+            <br />
+            <p>北海道の市区町村名の半角スペースを消してみよう！</p>
+            <div class="wrapper2">
+              <div>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  for i in df_new[df_new["市区町村名"].str.startswith("北海道 ")].index:
+                        city = df_new.loc[i,"市区町村名"]
+                        new_city = city.replace(" ","")
+                        df_new.loc[i,"市区町村名"] = new_city
+                </code></pre>
+              </div>
+              <div>
+                <ul>
+                  <li>
+                    変更したい行のインデックスを.indexメゾットを使って取得
+                  </li>
+                  <li>for文でiという変数で.locメゾットを実行する</li>
+                  <li>一度cityという変数へ現在の値を取得</li>
+                  <li>
+                    .replaceメゾットで"
+                    "(半角スペース)を""(空文字列)へ置き換える
+                  </li>
+                  <li>new_cityを改めて.locメゾットへ値を変更する</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameの操作
+            </p>
+            <h1>
+              DataFrameの一部を切り出して<br />新しいDataFrameを作成しよう！
+            </h1>
+            <hr />
+            <br />
+            <pre><code type="python" data-trim="" data-noescape="">
+              df_Tokyo = df_new[df_new["市区町村名"].str.startswith("東京都 ")].reset_index(drop=True)
+            </code></pre>
+            <div class="wrapper2">
+              <div>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  #オブジェクトidの確認
+                  id(df_Tokyo) == id(df_new)
+
+                  > False # OK!!!
+                </code></pre>
+              </div>
+              <div>
+                <ul>
+                  <li>
+                    データを一部抽出して変数を宣言する場合新しいオブジェクトidが附番される
+                  </li>
+                  <li>
+                    .reset_index()メゾットを使うとインデックスをリセット出来る
+                  </li>
+                  <li>
+                    .reset_index()メゾットの引数にdrop=Trueを入れると古いインデックスを削除出来る
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameの操作
+            </p>
+            <h1>必要な列のみを<br />フィルターしてみよう！</h1>
+            <hr />
+            <br />
+            <p>市区町村名と1970年と2010年の列へフィルターしてみよう！</p>
+            <div class="wrapper2">
+              <div>
+                <h3>.filter()メゾットを使う方法</h3>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df_Tokyo = df_Tokyo.filter(["市区町村名","1970年","2010年"])
+                </code></pre>
+                <ul>
+                  <li>ベストプラクティスはこっち！</li>
+                  <li>可読性が高い</li>
+                </ul>
+              </div>
+              <div>
+                <h3>各括弧2つでフィルターする方法</h3>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df_Tokyo = df_Tokyo[["市区町村名","1970年","2010年"]]
+                </code></pre>
+                <ul>
+                  <li>個人的にはこっちを良く使う</li>
+                  <li>記述量が少なくすむ</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameの操作
+            </p>
+            <h1>列名を変更してみよう！</h1>
+            <hr />
+            <br />
+            <div class="wrapper2">
+              <div>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df_Tokyo = df_Tokyo.rename(columns={
+                        "市区町村名":"city_name",
+                        "1970年":"str_1970",
+                        "2010年":"str_2010"
+                  })
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  # dot notation
+
+                  df_Tokyo.city_name[0]
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  > 東京都 千代田区
+                </code></pre>
+              </div>
+              <div>
+                <ul>
+                  <li>列名の変更には.rename()メゾットを使う</li>
+                  <li>
+                    .rename()メゾットの引数のcolumnsへ<br />
+                    {現在の列名 : 新しい列名}をdict型で渡す
+                  </li>
+                  <li>列名は英数字がベストプラクティス</li>
+                  <li>
+                    dot notation(ドット記法)で列へ直接アクセスが出来るので便利！
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameの操作
+            </p>
+            <h1>列名の追加・削除をしてみよう！</h1>
+            <hr />
+            <br />
+            <div class="wrapper2">
+              <div>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  for i in df_Tokyo.index:
+                        str_1970 = df_Tokyo.loc[i,'str_1970']
+                        pop_1970 = str_1970.replace(',','')
+                        pop_1970 = int(pop_1970)
+                        df_Tokyo.loc[i,"pop_1970"] = pop_1970
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  for i in df_Tokyo.index:
+                        str_2010 = df_Tokyo.loc[i,'str_2010']
+                        pop_2010 = str_2010.replace(',','')
+                        pop_2010 = int(pop_2010)
+                        df_Tokyo.loc[i,"pop_2010"] = pop_2010
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df_Tokyo = df_Tokyo.drop(["str_1970","str_2010"], axis=1)
+                </code></pre>
+              </div>
+              <div>
+                <ul>
+                  <li>
+                    str_1970と列名をした様にデータがカンマを含んだ文字列だった為、
+                  </li>
+                  <li>
+                    新たにpop_1970という列へ文字列をint型へ変換して格納しよう！
+                  </li>
+                  <li>
+                    forループで行う方法の他に.assign()メゾットでlambda関数で値を変更する方法もある
+                  </li>
+                  <li>
+                    最後に不要な文字列の列を.drop()メゾットを使って削除してみよう
+                  </li>
+                  <li>引数にaxis=1を入れると指定した列を削除出来る</li>
+                  <li>人口の数値データ列が出来たので色々集計してみよう！</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          <section data-background-color="#4b7578">
+            <p>
+              edaJuke(江田塾) ライブラリーを使ってみよう！pandas超入門 -
+              DataFrameの操作
+            </p>
+            <h1>行の追加・削除をしてみよう！</h1>
+            <hr />
+            <br />
+            <div class="wrapper2">
+              <div>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df_append = pd.DataFrame(
+                      columns = df_Tokyo.columns,
+                      data = [
+                          ["東京都 〇〇村", 5, 10]
+                      ]
+                  )
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df_Tokyo = pd.concat([
+                      df_Tokyo,
+                      df_append
+                  ], ignore_index=True)
+                </code></pre>
+                <pre><code type="python" data-trim="" data-noescape="">
+                  df_Tokyo = df_Tokyo.drop(62)
+                </code></pre>
+                <ul>
+                  <li>
+                    東京都 〇〇村は存在しないので<br />しっかり消しておこう！
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <ul>
+                  <li>まずは追加したい行のDataFrameを用意しよう！</li>
+                  <li>
+                    .concat()メゾットでDataFrameを統合する形で行の追加を行う
+                  </li>
+                  <li>
+                    .DataFrame()の引数へcolumns=df_Tokyo.columnsと定義すると楽
+                  </li>
+                  <li>
+                    .concat()メゾットはpandasのメゾットなのでpd.concat()<br />(df_Tokyo.concat()と書かない様に注意)
+                  </li>
+                  <li>[]各括弧の中に2つのDataFrameを入れて統合する</li>
+                  <li>
+                    デフォルトで元のインデックスが引き継がれてしまう為、引数へignore_index=Trueと入れる
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/search/search.js"></script>
+    <script src="plugin/menu/menu.js"></script>
+    <script>
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        center: true,
+        hash: true,
+        width: 1200,
+        height: 675,
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealNotes,
+          RevealSearch,
+          RevealMenu,
+        ],
+      });
+    </script>
+  </body>
+</html>
