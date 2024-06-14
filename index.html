@@ -647,7 +647,7 @@
             <br />
             <pre><code type="python" data-trim="" data-noescape="">
               url="http://www5.cao.go.jp/keizai-shimon/kaigi/special/future/keizai-jinkou_data/csv/file01.csv"
-              df=pd.DataFrame(url,encoding='shift-jis',header=7)
+              df=pd.read_csv(url,encoding='shift-jis',header=7)
             </code></pre>
             <ul>
               <li>
